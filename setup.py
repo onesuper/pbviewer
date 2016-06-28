@@ -10,7 +10,7 @@ setup(
     url='https://github.com/onesuper/pbviewer',
     author='onesuper',
     test_suite = 'nose.collector',
-    tests_require=['nose'],
+    tests_require=['nose', 'protobuf'],
 )
 
 
