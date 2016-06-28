@@ -1,7 +1,7 @@
 
 import unittest
 from proto import test_message_pb2
-from pbviewer.protobuf_parser import parse_from_input_stream
+from pbviewer import ParseFields
 
 
 
@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
 
         import io
         tube = io.BytesIO(s)
-        fields = parse_from_input_stream(tube)
+        fields = ParseFields(tube)
 
         self.assertEquals(20150101, fields[1].value)
         self.assertEquals(123, fields[2].value)

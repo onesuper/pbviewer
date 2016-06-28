@@ -5,7 +5,7 @@ from message import DecodeError
 from wire_format import *
 from proto_field import ProtoField
 
-def parse_from_input_stream(input_stream):
+def ParseFields(input_stream):
     delta_bytes = 0 
     total_bytes = 0
     total_raw_bytes = 0
