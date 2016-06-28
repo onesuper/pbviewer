@@ -2,11 +2,11 @@
 
 ## Motivation
 
-PBViewer is for inspecting fields from [Protocol Buffers](https://developers.google.com/protocol-buffers/) with the absense of `.proto` file.
+**Pbviewer** (or **pbviewer**) is for inspecting fields from [Protocol Buffers](https://developers.google.com/protocol-buffers/) with the absense of `.proto` file.
 
-It saves time of codegen (for Message reader) which means you do not need to install **protoc** on your machine.
+It saves time of codegen (for Message reader) and installation of **protoc** on your machine.
 
-## Install
+## Installation
 
 From the source code:
 
@@ -16,18 +16,12 @@ $ cd pbviewer
 $ python setup.py install
 ```
 
-## Dependencies
-
-Nothing! **Pbviewer** do not depend on any library, even python protobuf.
-
-But unitest does require Nose and protobuf.
-
 ## Example
 
 ```python
 from pbviewer import ParseFields
 
-# `ss` is the serialized data
+# `ss` is the serialized data (file-like object)
 fields = ParseFields(ss)
 
 """
@@ -46,13 +40,19 @@ for k,v in fields.items():
     print '{}\t{:7}\t{:20}\t{}\t{}'.format(k, v.type, v.value, v.size, v.hex)
 ```
 
+## Dependencies
+
+Nothing! **Pbviewer** do not depend on any library, even python protobuf.
+
+But the unittest requires Nose and protobuf.
+
 ## How it works?
 
-**Pbviewer** simply parses bytes by guessing what they mean. 
+**Pbviewer** simply parses byte buffer by guessing what the bytes mean. 
 
-More specifically, **Pbviewer** parses the fields based on the encoding rule of Protocol Buffers (a.k.a. wired format. Please refer to: https://developers.google.com/protocol-buffers/docs/encoding)
+More specifically, **pbviewer** parses the fields based on the encoding rule of Protocol Buffers (a.k.a. wired format. Please refer to: https://developers.google.com/protocol-buffers/docs/encoding). All code here is in pure python.
 
-As a result, it can not tell difference among `int64`, `uint64` and `sint64`. It only sees "variant-length" integers. And it references fields by tag numbers instead of their literal names.
+As a result, it can not tell difference among `int64`, `uint64` and `sint64`. It only sees "variant-length" integers. And it references all the fields by tag numbers instead of their literal names (appear in `.proto` file).
 
 ## License
 
